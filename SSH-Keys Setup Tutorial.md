@@ -44,7 +44,7 @@ Stelle sicher, dass die Berechtigungen korrekt gesetzt sind:\
 ## _9. Optional: nur über ssh key einlogen ohne password_
 optional schalte den ssh root login und pasword mechanismen ab: \
 ``sudo nano /etc/ssh/sshd_config`` \
-Finde die Zeilen:
+Finde die Zeilen: \
 ``#PasswordAuthentication``\
 ``#PermitRootLogin`` \
 ``#PubkeyAuthentication`` \
