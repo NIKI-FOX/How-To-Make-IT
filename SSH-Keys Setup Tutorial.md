@@ -81,6 +81,9 @@ Match all
   ForceCommand /usr/local/bin/generate_ssh_banner.sh && /bin/bash --login
 ######
 ```
+jetzt musst du das Skript noch ausführbar machen \
+``sudo chmod +x /etc/ssh/generate_ssh_banner.sh``
+
 dan noch eben den sshd dinst neustarten: \
 ``sudo systemctl restart sshd`` \
 und wenn du dich jetzt neu verbindest über SSH \
