@@ -78,7 +78,7 @@ in ``/etc/ssh/sshd_config`` mit einem ``#`` auskommentierst!
 
 # ForceCommand block to run the banner script and start a Bash session
 Match all
-  ForceCommand /usr/local/bin/generate_ssh_banner.sh && /bin/bash --login
+  ForceCommand /etc/ssh/generate_ssh_banner.sh && /bin/bash --login
 ######
 ```
 jetzt musst du das Skript noch ausführbar machen \
