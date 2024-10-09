@@ -55,23 +55,36 @@ Finde die Zeilen:
 
 ## _10. Optional: Costum SSH Banner_
 wen du ein costum banner sehen wilst beim verbinden über ssh: \
-``sudo nano /etc/ssh/banner.txt`` \
-´´´
-LUNA SSH NETWORK
-Hostname: <dynamischer Hostname>
-Host IP: <dynamische IP-Adresse>
-´´´ \
-und dan noch ein das script vür den Hostnamen...
-es ist hierbei wichtig dass du die Variable ``Banner`` in ``/etc/ssh/sshd_config`` mit einem ``#`` auskommentierst! \
-
+und dan noch ein das script vür den Hostnamen... \
+``sudo nano /etc/ssh/generate_ssh_banner.sh``
 ```
+#!/bin/bash
+
+# Dynamischer Banner mit Hostname und IP-Adresse
+echo "LUNA SSH NETWORK"
+echo "Hostname: $(hostname)"
+echo "Host IP: $(hostname -I | awk '{print $1}')"
+```
+
+
+es ist hierbei noch wichtig dass du die Variable ``Banner`` \
+in ``/etc/ssh/sshd_config`` mit einem ``#`` auskommentierst!
+
+``sudo nano /etc/ssh/sshd_config``
+```
+######
 # Disable the static Banner
-#Banner /etc/ssh/banner.txt
+#Banner none
 
 # ForceCommand block to run the banner script and start a Bash session
 Match all
   ForceCommand /usr/local/bin/generate_ssh_banner.sh && /bin/bash --login
+######
 ```
+dan noch eben den sshd dinst neustarten: \
+``sudo systemctl restart sshd`` \
+und wenn du dich jetzt neu verbindest über SSH \
+solltest du das Banner auch schon sehen können.
 
 ## 11. SSH-Server Dienst neuladen und neustarten
 ``sudo systemctl reload ssh`` \
