@@ -65,7 +65,75 @@ echo "LUNA SSH NETWORK"
 echo "Hostname: $(hostname)"
 echo "Host IP: $(hostname -I | awk '{print $1}')"
 ```
+oder
+```
+#!/bin/bash
 
+# Informationen für den Banner sammeln
+remote_host=$(echo $SSH_CLIENT | awk '{print $1}')      # IP des Clients (Verbindung von)
+remote_port=$(echo $SSH_CLIENT | awk '{print $3}')      # Port des Clients
+local_ip=$(hostname -I | awk '{print $1}')               # IP-Adresse des Servers
+
+# Funktion zur Ermittlung des Hostnamens mit dig
+get_hostname() { hostname=$(dig -x "$1" +short); echo "${hostname%.}"; }
+
+# Hostname ermitteln
+local_hostname=$(get_hostname "$local_ip")
+remote_hostname=$(get_hostname "$remote_host")
+
+# Wenn kein Hostname, verwende die IP
+[[ -z "$remote_hostname" ]] && remote_hostname=$remote_host
+
+# SSH-Port des Servers
+local_port=$(ss -tnlp | grep sshd | awk '{print $4}' | cut -d':' -f2 | head -n1)
+
+print_aligned() { printf "%-25s%-10s%s\n" "$1" ">" "$2"; }
+
+
+# ASCII-Logo als Array
+ascii_logo=(
+"          ."
+"         / \\"
+"        /   \\"
+"       /     \\"
+"      /_______\\"
+"________     ________"
+"\\      / / \\ \\      /"
+" \\    / /   \\ \\    /"
+"  \\  / /     \\ \\  /"
+"   \\/ /_______\\ \\/"
+"       _______"
+"       \\     /"
+"        \\   /"
+"         \\ /"
+"          v"
+)
+
+
+banner_title="LUNA SSH NETWORK $(date +"%d.%m.%Y %H:%M:%S")"
+banner_line=$(printf '=%.0s' {1..60})
+
+# Funktion zur Ausgabe des Banners mit festem Abstand von 100 Zeichen
+print_with_logo() {
+    # Ausgabe des Banners links
+    printf "%-65s%s\n" "$1" "${ascii_logo[$2]}"
+}
+
+# Banner anzeigen
+print_with_logo "$banner_line" 0
+print_with_logo "$banner_title" 1
+print_with_logo "$banner_line" 2
+print_with_logo "$(print_aligned "Client" "Server")" 3
+print_with_logo "$banner_line" 4
+print_with_logo "$(print_aligned "$remote_hostname" "$local_hostname")" 5
+print_with_logo "$(print_aligned "IP: $remote_host:$remote_port" "IP: $local_ip:$local_port")" 6
+print_with_logo "$banner_line" 7
+
+# Ausgabe des ASCII-Logos in den folgenden Zeilen ohne Bannerinhalt
+for i in {8..14}; do
+    printf "%65s%s\n" "" "${ascii_logo[$i]}"
+done
+```
 
 es ist hierbei noch wichtig dass du die Variable ``Banner`` \
 in ``/etc/ssh/sshd_config`` mit einem ``#`` auskommentierst!
