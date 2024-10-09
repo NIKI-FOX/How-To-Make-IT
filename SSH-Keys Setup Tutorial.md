@@ -128,9 +128,10 @@ print_with_logo "$banner_line" 4
 print_with_logo "$(print_aligned "$remote_hostname" "$local_hostname")" 5
 print_with_logo "$(print_aligned "IP: $remote_host:$remote_port" "IP: $local_ip:$local_port")" 6
 print_with_logo "$banner_line" 7
+print_with_logo "System Uptime: $(awk '{print int($1/86400)":"int(($1%86400)/3600)":"int(($1%3600)/60)":"$1%60" dhms"}' /proc/uptime)" 8
 
 # Ausgabe des ASCII-Logos in den folgenden Zeilen ohne Bannerinhalt
-for i in {8..14}; do
+for i in {9..14}; do
     printf "%65s%s\n" "" "${ascii_logo[$i]}"
 done
 ```
