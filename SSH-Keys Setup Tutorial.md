@@ -53,11 +53,30 @@ Finde die Zeilen:
 ``PermitRootLogin prohibit-password`` \
 ``PubkeyAuthentication yes``
 
-## 10. SSH-Server Dienst neuladen und neustarten
+## _10. Optional: Costum SSH Banner_
+wen du ein costum banner sehen wilst beim verbinden über ssh: \
+``sudo nano /etc/ssh/banner.txt`` \
+´´´
+LUNA SSH NETWORK
+Hostname: <dynamischer Hostname>
+Host IP: <dynamische IP-Adresse>
+´´´ \
+und dan noch ein das script vür den Hostnamen...
+es ist hierbei wichtig dass du die Variable ``Banner`` in ``/etc/ssh/sshd_config`` mit einem ``#`` auskommentierst! \
+
+```
+# Disable the static Banner
+#Banner /etc/ssh/banner.txt
+
+# ForceCommand block to run the banner script and start a Bash session
+Match all
+  ForceCommand /usr/local/bin/generate_ssh_banner.sh && /bin/bash --login
+```
+
+## 11. SSH-Server Dienst neuladen und neustarten
 ``sudo systemctl reload ssh`` \
 ``sudo systemctl restart ssh`` \
 ``sudo systemctl reload sshd`` \
 ``sudo systemctl restart sshd``
-## 11. Teste Über SSH zum Remote-Server die verbinden
+## 12. Teste Über SSH zum Remote-Server die verbinden
 ``ssh benutzername@ip-oder-host-name-vom-remote-server``
-
