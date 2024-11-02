@@ -27,7 +27,7 @@ Eine Version, die fast fertig ist und kurz vor der endgültigen
 Veröffentlichung steht. Es können noch kleinere Fehler vorhanden sein,
 aber diese Version ist weitgehend stabil.
 
-# Production
+# "Production" oder "Stable" oder "Safe"
 Das Paket ist stabil und bereit für den Einsatz in der
 Produktion. Es wurde gründlich getestet und alle geplanten Funktionen sind implementiert.
 
