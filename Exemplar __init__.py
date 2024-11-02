@@ -35,7 +35,6 @@ Produktion. Es wurde gründlich getestet und alle geplanten Funktionen sind impl
 Das Paket wird nicht mehr weiterentwickelt oder unterstützt und sollte
 nicht mehr verwendet werden. Es wird möglicherweise in zukünftigen Versionen entfernt.
 """
-
 # --- Metadaten für das Paket ---
 __title__ = "fox_test_py_packet_1"
 __description__ = "Ein Beispielpaket für Demonstrationszwecke"
@@ -45,24 +44,16 @@ __license__ = "MIT"
 __license_url__ = "https://github.com/NIKI-FOX/fox_test_py_packet_1/blob/main/LICENSE"
 __url__ = "https://github.com/NIKI-FOX/fox_test_py_packet_1.git"
 __dependencies__ = ["virtualenv"]
-
-# --- Weitere Informationen ---
-__copyright__ = "Copyright (c) 2024 NIKI FOX" # Copyright (c) [Jahr(e)] [Urheber/Name des Autors oder Organisation]
+__copyright__ = "Copyright (c) 2024 NIKI FOX"
 __status__ = "Development"
 __maintainer__ = "NIKI-FOX"
 __credits__ = ["NIKI-FOX", "LUNA Nr.7"]
 
 
-#from .modul_a import funktion_a
-#from .modul_b import funktion_b
+#print("Das Paket 'module' wurde importiert")
 
-
-
-
-print("Das Paket 'module' wurde importiert")
-
-def show_info():
-    """Gibt alle Metadaten des Pakets aus."""
+# nur ausführen, wenn die __init__.py Datei direkt ausgeführt wird
+if __name__ == "__main__":
     print(f"Title: {__title__}")
     print(f"Description: {__description__}")
     print(f"Version: {__version__}")
@@ -75,14 +66,8 @@ def show_info():
     print(f"Maintainer: {__maintainer__}")
     print(f"Credits: {', '.join(__credits__)}")
 
-# Optional: Info beim Import ausgeben
-if __name__ == "__main__":
-    show_info()
-    
-
-
-# Importe nur ausführen, wenn die Datei nicht direkt ausgeführt wird
-if __name__ != "__main__":
+# nur ausführen, wenn die __init__.py Datei nicht direkt ausgeführt wird
+if __name__ != "__main__": 
     from .modul_a import *
     from .modul_b import *
     
