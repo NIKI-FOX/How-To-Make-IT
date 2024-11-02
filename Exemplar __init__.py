@@ -67,7 +67,7 @@ if __name__ == "__main__":
     print(f"Credits: {', '.join(__credits__)}")
 
 # nur ausführen, wenn die __init__.py Datei nicht direkt ausgeführt wird
-if __name__ != "__main__": 
+if __name__ != "__main__":
     from .modul_a import *
     from .modul_b import *
     
